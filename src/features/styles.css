@@ -1,52 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Recursive&display=swap');
 
-.main {
-  background-color: #008891;
-  color: #fff;
-  width: 30%;
-  border-radius: 15px;
-  margin: 0 auto;
-}
-
-.header {
-  background-color: #000000;
-  padding: 0.5vw;
-  border-radius: 15px 15px 0 0;
-  font-size: 2vw;
-  font-family: 'Recursive', sans-serif;
-  margin-bottom: 0px;
-  align-items: center;
-}
-
-.header > p {
-  margin-block: auto;
-}
-
 .container {
-  font-family: 'Recursive', sans-serif;
-  padding: 0.5vw;
-  font-weight: 600;
+  background-color: teal;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 60vw;
+  text-align: center;
+  color: white;
+  height: 50vh;
 }
 
-.day {
-  font-size: 1.2vw;
+.container > header {
+  padding: 1.5vw;
+  font-family: 'Roboto Slab', serif;
+  font-size: 2vw;
+  letter-spacing: 2px;
+}
+
+.weather {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.desc {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .temp {
-  font-weight: 500;
+  flex: 1;
+  font-size: 40px;
 }
 
-.flex {
-  display: flex;
-  justify-content: space-between;
+.wind {
+  flex: 1;
 }
 
-.button{
-  width: 35px;
-  height: 35px;
-}
-
-.syncIcon {
-  border: 1px solid white;
-  border-radius: 50%;
+.icon {
+  font-size: 5vw;
 }
