@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Recursive&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Recursive&family=Open+Sans:wght@300&display=swap');
 
 .container {
-  background-color: teal;
-  border: 1px solid black;
   border-radius: 10px;
   width: 60vw;
   text-align: center;
   color: white;
   height: 50vh;
+  font-family: 'Roboto Slab', serif;
+  background-color: rgba(24, 22, 22, 0.15);  
+  backdrop-filter: blur(5px);
 }
 
 .container > header {
   padding: 1.5vw;
-  font-family: 'Roboto Slab', serif;
+
   font-size: 2vw;
   letter-spacing: 2px;
 }
@@ -30,15 +31,27 @@
   flex-direction: column;
 }
 
+.desc > span  {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 25px;
+}
+
 .temp {
   flex: 1;
-  font-size: 40px;
+  font-size: 60px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .wind {
   flex: 1;
+  font-size: 20px;
+}
+
+.wind > p {
+  margin: 10px;
 }
 
 .icon {
-  font-size: 5vw;
+  font-size: 6vw;
 }

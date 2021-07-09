@@ -1,8 +1,7 @@
 .App {
   height: 100vh;
-  background: #c2e59c; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #c2e59c, #64b3f4); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #c2e59c, #64b3f4);
+  background: url('./assets/images/sky.jpg');
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;

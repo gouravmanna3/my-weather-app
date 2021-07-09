@@ -13,10 +13,10 @@ const Weather = (props) => {
       <section className="weather">
         <article className="desc">
           <WeatherIcon  iconData={iconData}/>
-          <p>{ weatherData?.weather ? weatherData?.weather[0].description : ''}</p>
+          <span>{ weatherData?.weather ? weatherData?.weather[0].description : ''}</span>
         </article>
         <article className="temp">
-          <p>{weatherData.main?.temp}&deg;c</p>
+          <span>{weatherData.main?.temp}&deg;c</span>
         </article>
         <article className="wind">
           <p>Wind: {weatherData?.wind?.speed} m/s</p>
