@@ -1,8 +1,0 @@
-.App {
-  height: 100vh;
-  background: url('./assets/images/sky.jpg');
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
