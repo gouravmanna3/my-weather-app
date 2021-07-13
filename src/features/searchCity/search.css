@@ -1,0 +1,9 @@
+.searchContainer {
+  width: 25vw;
+  margin: 5vw auto;
+}
+
+.searchInput {
+  padding-left: 25px;
+  border-radius: 25px;
+}

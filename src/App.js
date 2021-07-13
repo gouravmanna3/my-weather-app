@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import Weather from './features/weather';
+import SearchCity from './features/searchCity/index';
+
+import './App.css';
 
 function App() {
 
@@ -35,7 +37,8 @@ function App() {
   }, [lat,long]);
 
   return (
-    <div className="App">
+    <div>
+      <SearchCity />
       { (typeof data.main!= undefined) ? (
         <Weather weatherData={data}/>
       ) : (
