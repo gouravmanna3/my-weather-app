@@ -1,22 +1,33 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, FormGroup, Input } from 'reactstrap';
+import { WeatherContext } from '../../App'
 
 import './search.css';
 
-const SearchCity = () => {
+const SearchCity = (props) => {
 
-  const inputRef = useRef(null);
+  const weatherContext = useContext(WeatherContext);
+  const { city, dispatch } = weatherContext;
+  const { getCityWeather } = props;
 
-  const submitForm = (e) => {
-    e.preventDefault();
+  const onChange = (e) => {
+    dispatch({type: 'SET_CITY', payload: e.target.value });
   }
 
   return (
-    <div class="searchContainer">
-      <Form class="searchForm" onSubmit={submitForm}>
+    <div className="searchContainer">
+      <Form className="searchForm" onSubmit={getCityWeather}>
         <FormGroup>
-          <Input ref={inputRef} type="text" name="city" placeholder="Enter city" className="searchInput" bsSize="lg" />
+          <Input
+            type="text" 
+            name="city"
+            value={city}
+            placeholder="Enter city" 
+            className="searchInput" 
+            bsSize="lg" 
+            onChange={onChange}
+          />
         </FormGroup>
       </Form>
     </div>

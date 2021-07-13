@@ -1,14 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
+import axios from 'axios';
 import Weather from './features/weather';
 import SearchCity from './features/searchCity/index';
 
 import './App.css';
+
+export const WeatherContext = React.createContext();
+
+const initialState = {
+  city: ''
+};
+
+const reducer = (state, action) => {
+  switch(action.type) {
+    case 'SET_CITY':
+      return {
+        ...state, city: action.payload
+      }
+    default:
+      return state;
+  }
+}
 
 function App() {
 
   const [lat, setLat] = useState([0]);
   const [long, setLong] = useState(0);
   const [data, setData] = useState([]);
+
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,15 +56,28 @@ function App() {
     
   }, [lat,long]);
 
+  const cityWeather = (e) => {
+    e.preventDefault();
+    const { city } = state;
+    axios.get(`${process.env.REACT_APP_API_URL}/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
+    .then(response => {
+      setData(response.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
   return (
-    <div>
-      <SearchCity />
-      { (typeof data.main!= undefined) ? (
-        <Weather weatherData={data}/>
-      ) : (
-        <div>False</div>
-      )}
-    </div>
+    <WeatherContext.Provider value={{ city: state.city, dispatch}}>
+      <div>
+        <SearchCity getCityWeather={cityWeather}/>
+        { (typeof data.main!= undefined) ? (
+          <Weather weatherData={data}/>
+        ) : (
+          <div>False</div>
+        )}
+      </div>
+    </WeatherContext.Provider>
   );
 }
 
