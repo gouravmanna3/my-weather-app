@@ -1,0 +1,21 @@
+.searchContainer {
+  margin: 5vw auto;
+  transition: width 0.8s ease 0.5s;
+}
+
+.searchInput {
+  padding-left: 25px;
+  border-radius: 25px;
+}
+
+@media screen and (min-width: 600px) {
+  .searchContainer {
+    width: 500px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .searchContainer {
+    width: 600px;
+  }
+}
