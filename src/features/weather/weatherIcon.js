@@ -9,7 +9,7 @@ import {
   faSmog,
 } from '@fortawesome/free-solid-svg-icons';
 
-import './styles.css';
+import './weather.css';
 
 const WeatherIcon = (props) => {
   const { iconData } = props;

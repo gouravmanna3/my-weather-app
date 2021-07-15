@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+.weather-container {
+  border-radius: 10px;
+  width: 100%;
+  color: white;
+  height: 40vh;
+  font-family: 'Source Sans Pro', sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header {
+  flex-basis: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.header > h2 {
+  font-size: 4vw;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.weather {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.desc {
+  flex-basis: 33.33%
+}
+
+.desc > span {
+  font-size: 1.5vw;
+  text-transform: capitalize;
+}
+
+.temp {
+  flex-basis: 33.33%;
+  font-size: 120px;
+}
+
+.wind {
+  flex-basis: 33.33%
+}
+
+.icon {
+  font-size: 6vw;
+}
+
+@media screen and (max-width: 768px) {
+  .desc {
+    flex-basis: 50%
+  }
+  
+  .temp {
+    flex-basis: 50%;
+    font-size: 70px;
+  }
+
+  .wind {
+    flex-basis: 100%
+  }
+
+}
