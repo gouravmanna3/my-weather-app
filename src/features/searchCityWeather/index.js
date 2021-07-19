@@ -25,7 +25,6 @@ const SearchCity = () => {
             value={city}
             placeholder="Enter city" 
             className="searchInput" 
-            bsSize="lg" 
             onChange={onChange}
           />
         </FormGroup>
