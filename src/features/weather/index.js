@@ -3,6 +3,12 @@ import axios from 'axios';
 import WeatherIcon from './weatherIcon';
 import SearchCity from '../searchCityWeather/index';
 import moment from 'moment';
+import {
+  Navbar,
+  NavbarBrand,
+} from 'reactstrap';
+
+import logo from '../../assets/images/logo.gif'
 
 import './weather.css';
 
@@ -80,6 +86,12 @@ const Weather = () => {
 
   return (
     <main>
+      <Navbar className="container-fluid" color="transparent" full={true} light expand="md">
+        <NavbarBrand className="brandText" href="/">
+          My Weather App
+          <img src={logo} alt="logo"/>
+        </NavbarBrand>
+      </Navbar>
       <WeatherContext.Provider value={{ state, dispatch, cityWeather }}>
         <SearchCity />
       </WeatherContext.Provider>
@@ -92,10 +104,10 @@ const Weather = () => {
         <section className="weather">
           <article className="desc">
             <WeatherIcon  iconData={iconData}/>
-            <span>{ weatherData?.weather ? weatherData?.weather[0].description : ''}</span>
+            <span className="descText">{ weatherData?.weather ? weatherData?.weather[0].description : ''}</span>
           </article>
           <article className="temp">
-            <span>{weatherData.main?.temp}&deg;c</span>
+            <span>{parseInt(weatherData.main?.temp)}&deg;c</span>
           </article>
           <article className="wind">
             <p>Wind: {weatherData?.wind?.speed} m/s</p>

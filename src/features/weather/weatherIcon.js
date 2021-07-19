@@ -34,9 +34,9 @@ const WeatherIcon = (props) => {
   }
 
   return (
-    <div className='icon'>
+    <span className='icon'>
       <FontAwesomeIcon icon={fIcon} />
-    </div>
+    </span>
   )
 }
 
