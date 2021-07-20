@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+.forecastContainer {
+  padding:0 10px;
+  color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+header {
+  font-size: 25px;
+  padding: 10px 0;
+}
+
+.hourTemp {
+  display: flex;
+}
+
+.hourTemp > section {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  margin: 10px;
+}
