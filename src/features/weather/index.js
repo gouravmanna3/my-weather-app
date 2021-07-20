@@ -7,10 +7,11 @@ import {
   Navbar,
   NavbarBrand,
 } from 'reactstrap';
-
+import Forecast from '../forecast/index';
 import logo from '../../assets/images/logo.gif'
 
 import './weather.css';
+
 
 const initialState = {
   city: '',
@@ -89,7 +90,7 @@ const Weather = () => {
       <Navbar className="container-fluid" color="transparent" full={true} light expand="md">
         <NavbarBrand className="brandText" href="/">
           My Weather App
-          <img src={logo} alt="logo"/>
+          <img src={logo} alt="logo" className="brandImg"/>
         </NavbarBrand>
       </Navbar>
       <WeatherContext.Provider value={{ state, dispatch, cityWeather }}>
@@ -109,13 +110,35 @@ const Weather = () => {
           <article className="temp">
             <span>{parseInt(weatherData.main?.temp)}&deg;c</span>
           </article>
-          <article className="wind">
-            <p>Wind: {weatherData?.wind?.speed} m/s</p>
-            <p>Sunrise: {new Date(weatherData?.sys?.sunrise*1000).toLocaleTimeString('en-IN')}</p>
-            <p>Sunset: {new Date(weatherData?.sys?.sunset*1000).toLocaleTimeString('en-IN')}</p>
+          <article className="detailsContainer">
+            <article>
+              <h4>{parseInt(weatherData?.main?.temp_min)}&deg;c</h4>
+              <span>Low</span>
+            </article>
+            <article>
+              <h4>{weatherData?.wind?.speed} m/s</h4>
+              <span>Wind</span>
+            </article>
+            <article>
+              <h4>{weatherData.main?.humidity}%</h4>
+              <span>Humidity</span>
+            </article>
+            <article>
+              <h4>{parseInt(weatherData?.main?.temp_max)}&deg;c</h4>
+              <span>High</span>
+            </article>
+            <article>
+              <h4>{new Date(weatherData?.sys?.sunrise*1000).toLocaleTimeString('en-IN',{hour: '2-digit', minute:'2-digit'})}</h4>
+              <span>Sunrise</span>
+            </article>
+            <article>
+              <h4>{new Date(weatherData?.sys?.sunset*1000).toLocaleTimeString('en-IN',{hour: '2-digit', minute:'2-digit'})}</h4>
+              <span>Sunset</span>
+            </article>
           </article>
         </section>
       </div>
+      <Forecast />
     </main>
   )
 }

@@ -7,6 +7,10 @@
   font-weight: 600;
 }
 
+.brandImg {
+  width: 60px;
+}
+
 .weather-container {
   border-radius: 10px;
   width: 100%;
@@ -55,8 +59,25 @@
   font-size: 120px;
 }
 
-.wind {
-  flex-basis: 33.33%
+.detailsContainer {
+  flex-basis: 33.33%;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 10px;
+}
+
+.detailsContainer > article {
+  padding: 10px;
+  flex-basis: 33.33%;
+  text-align: center;
+}
+
+.detailsContainer > article > h4 {
+  font-size: 20px;
+  margin-bottom: 0;
+
 }
 
 .icon {
@@ -70,12 +91,18 @@
   
   .temp {
     flex-basis: 50%;
-    font-size: 66px;
+    font-size: 85px;
   }
 
-  .wind {
+  .detailsContainer {
     flex-basis: 100%;
     margin-top: 20px;
   }
 
+}
+
+@media screen and (max-width: 320px) {
+  .temp {
+    font-size: 80px;
+  }
 }
