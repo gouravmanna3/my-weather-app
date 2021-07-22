@@ -12,7 +12,7 @@ import {
 import './weather.css';
 
 const WeatherIcon = (props) => {
-  const { iconData } = props;
+  const { iconData, className } = props;
   const icon = iconData?.icon;
   const iconId = iconData?.id;
   const main = iconData?.main;
@@ -34,7 +34,7 @@ const WeatherIcon = (props) => {
   }
 
   return (
-    <span className='icon'>
+    <span className={className}>
       <FontAwesomeIcon icon={fIcon} />
     </span>
   )

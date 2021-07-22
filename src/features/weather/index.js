@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import WeatherIcon from './weatherIcon';
 import SearchCity from '../searchCityWeather/index';
 import moment from 'moment';
@@ -10,12 +12,14 @@ import {
 import Forecast from '../forecast/index';
 import logo from '../../assets/images/logo.gif'
 
+
 import './weather.css';
 
 
 const initialState = {
   city: '',
-  weatherData: []
+  weatherData: [],
+  forecastData: []
 };
 
 const reducer = (state, action) => {
@@ -27,6 +31,10 @@ const reducer = (state, action) => {
     case 'SET_WEATHER_DATA':
       return {
         ...state, weatherData: action.payload
+      }
+    case 'SET_FORECAST_DATA':
+      return {
+        ...state, forecastData: action.payload
       }
     default:
       return state;
@@ -56,10 +64,14 @@ const Weather = () => {
   }
 
   const callApi = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/weather/?lat=${coordinates.lat}&lon=${coordinates.long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
-    .then(result => {
-      dispatch({type: 'SET_WEATHER_DATA', payload: result.data})
-    })
+    axios.all([
+      axios.get(`${process.env.REACT_APP_API_URL}/weather/?lat=${coordinates.lat}&lon=${coordinates.long}&units=metric&cnt=10&APPID=${process.env.REACT_APP_API_KEY}`),
+      axios.get(`${process.env.REACT_APP_API_URL}/forecast?lat=${coordinates.lat}&lon=${coordinates.long}&units=metric&cnt=10&APPID=${process.env.REACT_APP_API_KEY}`),
+    ])
+    .then(axios.spread((weather, forecast) => {
+      dispatch({type: 'SET_WEATHER_DATA', payload: weather.data})
+      dispatch({type: 'SET_FORECAST_DATA', payload: forecast.data})
+    }))
     .catch(err => {
       console.log('error')
     })
@@ -83,8 +95,9 @@ const Weather = () => {
   },[coordinates.lat, coordinates.long]);
 
   const { weatherData } = state;
+  const { forecastData } = state;
   const iconData = weatherData?.weather ? weatherData?.weather[0] : {};
-
+  console.log()
   return (
     <main>
       <Navbar className="container-fluid" color="transparent" full={true} light expand="md">
@@ -98,13 +111,14 @@ const Weather = () => {
       </WeatherContext.Provider>
       <div className="weather-container">
         <article className="header">
-          <h2>{weatherData?.name}, {weatherData?.sys?.country}</h2>
+          <FontAwesomeIcon icon={faMapMarkerAlt} className="locationIcon"/>
+          <span> {weatherData?.name}, {weatherData?.sys?.country}</span>
           <h4>{moment().format('dddd MMMM Do, YYYY')}</h4>
         </article>
         
         <section className="weather">
           <article className="desc">
-            <WeatherIcon  iconData={iconData}/>
+            <WeatherIcon  iconData={iconData} className='icon'/>
             <span className="descText">{ weatherData?.weather ? weatherData?.weather[0].description : ''}</span>
           </article>
           <article className="temp">
@@ -138,7 +152,10 @@ const Weather = () => {
           </article>
         </section>
       </div>
-      <Forecast />
+      <WeatherContext.Provider value={{forecastData}}>
+        <Forecast />
+      </WeatherContext.Provider>
+
     </main>
   )
 }
