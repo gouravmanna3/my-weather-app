@@ -13,10 +13,18 @@ header {
 
 .hourTemp {
   display: flex;
+  overflow: scroll;
 }
 
 .hourTemp > section {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 10px;
   margin: 10px;
+  text-align: center;
+  border-radius: 5px;
+  flex-basis: 10%;
+}
+
+.hourlyIcon {
+  font-size: 20px;
 }
