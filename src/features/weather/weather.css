@@ -51,7 +51,7 @@
 
 .descText {
   display: block;
-  margin-top: -22px;
+  margin-top: -18px;
 }
 
 .temp {
@@ -88,6 +88,11 @@
   font-size: 32px;
 }
 
+.loading {
+  text-align: center;
+  margin-top: 100px;
+}
+
 @media screen and (max-width: 768px) {
   .desc {
     flex-basis: 50%
@@ -101,6 +106,12 @@
   .detailsContainer {
     flex-basis: 100%;
     margin-top: 20px;
+  }
+
+  .descText {
+    min-width: fit-content;
+    width: 66px;
+    text-align: center;
   }
 
 }
