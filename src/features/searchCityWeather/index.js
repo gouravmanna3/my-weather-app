@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, FormGroup, Input } from 'reactstrap';
 import { WeatherContext } from '../weather/index';
@@ -17,6 +17,7 @@ const SearchCity = () => {
 
   return (
     <div className="searchContainer">
+      <h2 className="searchCityLabel">Search City</h2>
       <Form className="searchForm" onSubmit={cityWeather}>
         <FormGroup>
           <Input

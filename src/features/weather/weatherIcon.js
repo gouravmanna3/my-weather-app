@@ -13,10 +13,7 @@ import './weather.css';
 
 const WeatherIcon = (props) => {
   const { iconData, className } = props;
-  const icon = iconData?.icon;
-  const iconId = iconData?.id;
   const main = iconData?.main;
-  const description = iconData?.description;
   let fIcon = null;
 
   if(main === 'Rain') {

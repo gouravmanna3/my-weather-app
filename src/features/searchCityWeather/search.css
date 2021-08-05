@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
 .searchContainer {
   margin: 5vw auto;
   padding: 0 12px;
@@ -11,6 +13,12 @@
 
 .searchInput:focus {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.searchCityLabel {
+  text-align: center;
+  color: white;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 @media screen and (min-width: 600px) {

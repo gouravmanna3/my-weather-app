@@ -7,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('./assets/images/sky.jpg');
+  background: url('./assets/images/bg.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

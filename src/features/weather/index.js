@@ -1,60 +1,25 @@
-import React, { useState, useEffect, useReducer } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import Loader from "react-loader-spinner";
 import WeatherIcon from './weatherIcon';
 import SearchCity from '../searchCityWeather/index';
 import moment from 'moment';
-import {
-  Navbar,
-  NavbarBrand,
-} from 'reactstrap';
+import { Navbar, NavbarBrand } from 'reactstrap';
 import logo from '../../assets/images/logo.gif';
-import Loader from "react-loader-spinner";
-
+import CityNotFound from './cityNotFound';
+import { reducer, initialState } from '../../reducer/reducer';
+import  { getCityWeather, getCurrentLocationWeather } from '../weatherSlice';
 
 import './weather.css';
-
-
-const initialState = {
-  city: '',
-  weatherData: [],
-  weatherDataApiStatus: 'notStarted',
-  forecastData: []
-};
-
-const reducer = (state, action) => {
-  switch(action.type) {
-    case 'SET_CITY':
-      return {
-        ...state, city: action.payload
-      };
-    case 'SET_WEATHER_DATA':
-      return {
-        ...state, weatherData: action.payload
-      }
-    case 'SET_FORECAST_DATA':
-      return {
-        ...state, forecastData: action.payload
-      }
-    case 'SET_WEATHER_DATA_API_STATUS':
-      return {
-        ...state, weatherDataApiStatus: action.payload
-    }
-    default:
-      return state;
-  }
-}
 
 export const WeatherContext = React.createContext();
 
 const Weather = () => {
-
   const [coordinates,  setCoordinates] = useState({
     lat: '',
     long: ''
   });
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const fetchData = () => {
@@ -68,9 +33,9 @@ const Weather = () => {
     });
   }
 
-  const callApi = () => {
+  const callApi = useCallback(() => {
     dispatch({type: 'SET_WEATHER_DATA_API_STATUS', payload: 'inProgress'})
-    axios.get(`${process.env.REACT_APP_API_URL}/weather/?lat=${coordinates.lat}&lon=${coordinates.long}&units=metric&cnt=10&APPID=${process.env.REACT_APP_API_KEY}`)
+    getCurrentLocationWeather(coordinates)
     .then(res => {
       dispatch({type: 'SET_WEATHER_DATA', payload: res.data})
       dispatch({type: 'SET_WEATHER_DATA_API_STATUS', payload: 'found'})
@@ -78,13 +43,13 @@ const Weather = () => {
     .catch(err => {
       dispatch({type: 'SET_WEATHER_DATA_API_STATUS', payload: 'error'})
     })
-  }
+  },[coordinates.lat, coordinates.long])
 
   const cityWeather = (e) => {
     e.preventDefault();
-    dispatch({type: 'SET_WEATHER_DATA_API_STATUS', payload: 'inProgress'})
+    dispatch({type: 'SET_WEATHER_DATA_API_STATUS', payload: 'inProgress'});
     const { city } = state;
-    axios.get(`${process.env.REACT_APP_API_URL}/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
+    getCityWeather(city)
     .then(response => {
       dispatch({type: 'SET_WEATHER_DATA', payload: response.data});
       dispatch({type: 'SET_WEATHER_DATA_API_STATUS', payload: 'found'})
@@ -102,7 +67,7 @@ const Weather = () => {
   },[coordinates.lat, coordinates.long]);
 
   const { weatherData, weatherDataApiStatus } = state;
-  const { forecastData } = state;
+  // const { forecastData } = state;
   const iconData = weatherData?.weather ? weatherData?.weather[0] : {};
   return (
     <main>
@@ -125,7 +90,7 @@ const Weather = () => {
             />
           </div>
            : weatherDataApiStatus === 'error' ? 
-            <h1>City not found</h1>
+              <CityNotFound />
            :
           <div className="weather-container">
             <article className="header">
