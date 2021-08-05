@@ -2,6 +2,7 @@
   "name": "my-weather-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://gouravmanna3.github.io/my-weather-app",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
@@ -23,11 +24,16 @@
     "semantic-ui-react": "^2.0.3",
     "web-vitals": "^1.0.1"
   },
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
