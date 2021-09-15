@@ -6,7 +6,7 @@ const CityNotFound = () => {
   return (
     <div className="errorContainer">
         <FontAwesomeIcon className="searchIcon" icon={faSearchLocation} />
-        <h2>city not found &#x1F614;</h2>    
+        <h2>city not found</h2><span>&#x1F614;</span>
     </div>
   )
 }
